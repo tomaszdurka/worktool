@@ -1,6 +1,6 @@
 require 'rake'
-require 'rspec/core/rake_task'
+require 'bundler/gem_tasks'
 
-RSpec::Core::RakeTask.new(:test) do |t|
-  t.pattern = 'spec/**/*_spec.rb'
+Dir.glob(File.expand_path('../tasks/*.rake', __FILE__)).each do |task|
+  load task
 end
