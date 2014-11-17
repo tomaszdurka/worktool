@@ -6,10 +6,15 @@ module Worktool
     def execute
       commands = []
       params = Worktool::Github.new.extract(query)
-      manager = Worktool::ProjectManager.new('/Users/tomasz/projects');
-      commands << 'cd ' + manager.find_repo_path(params)
-      commands << 'gi checkout ' + params[:issue] if params[:issue]
-      puts commands
+      manager = Worktool::ProjectManager.new(ENV['PROJECTS_PATH'])
+      repo = manager.find_repo_path(params)
+      if repo
+        commands << 'cd ' + repo.to_s
+        if params[:issue]
+          commands << 'gi checkout ' + params[:issue].to_s
+        end
+      end
+      puts commands.join(' && ')
     end
   end
 end
