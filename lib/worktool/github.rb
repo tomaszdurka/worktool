@@ -9,7 +9,7 @@ module Worktool
     end
 
     def extract_url(url)
-      matches = url.match(/^https?:\/\/github\.com\/([^\/]+)\/([^\/]+)\/(.*)/)
+      matches = url.match(/^https?:\/\/(?:www\.)?github\.com\/([^\/]+)\/([^\/]+)\/(.*)/)
       return nil unless matches
       data = {
           :user => matches[1],

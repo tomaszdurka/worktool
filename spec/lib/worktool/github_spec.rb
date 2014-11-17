@@ -9,6 +9,7 @@ describe Worktool::Github do
     github.extract('http://github.com/user/repo/pull/123').should eq({:user => 'user', :repo => 'repo', :issue => 123})
     github.extract('http://github.com/user/repo/invalid/123').should eq({:user => 'user', :repo => 'repo'})
     github.extract('http://github.com/user/repo/issues').should eq({:user => 'user', :repo => 'repo'})
+    github.extract('http://www.github.com/user/repo/issues').should eq({:user => 'user', :repo => 'repo'})
     github.extract('http://github.com/user/repo/something/else/which/doesnt/matter').should eq({:user => 'user', :repo => 'repo'})
     github.extract('http://hubgit.com/user/repo/issues/123').should eq(nil)
   end
