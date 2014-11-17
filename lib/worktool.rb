@@ -5,6 +5,8 @@ module Worktool
   require 'github_api'
   require 'io/console'
   require 'json'
+  require 'pathname'
+  require 'shellwords'
   require 'worktool/project_manager'
   require 'worktool/github'
   require 'worktool/command'

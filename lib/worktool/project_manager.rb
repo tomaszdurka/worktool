@@ -12,6 +12,7 @@ module Worktool
       else
         project = find_project_by_repo(params[:repo])
       end
+      return nil unless project
       Pathname.new(@projects_path).join(project).to_s
     end
 
@@ -30,7 +31,10 @@ module Worktool
     end
 
     def projects
-      %w(cargomedia/sk cargomedia/cm cargomedia/bipbip tomaszdurka/worktool tomaszdurka/dotfiles codespot/software-house tomaszdurka/sk)
+      projects_path = Pathname.new(@projects_path)
+      Pathname.glob(projects_path.join('*/*/')).map do |directory|
+        directory.relative_path_from(projects_path).to_s
+      end
     end
   end
 end
