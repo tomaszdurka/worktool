@@ -9,10 +9,12 @@ module Worktool
       manager = Worktool::ProjectManager.new(ENV['PROJECTS_PATH'])
       repo = manager.find_repo_path(params)
       if repo
-        commands << 'cd ' + repo.to_s
+        commands << 'cd ' + Shellwords.escape(repo.to_s)
         if params[:issue]
-          commands << 'gi checkout ' + params[:issue].to_s
+          commands << 'gi checkout ' + Shellwords.escape(params[:issue].to_s)
         end
+      else
+        commands << '# Repo not found'
       end
       puts commands.join(' && ')
     end
